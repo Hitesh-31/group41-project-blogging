@@ -41,6 +41,23 @@ const createAuthor = async function (req, res) {
                 .status(400)
                 .send({ status: false, message: "password is required" });
         }
+         let titleArr = ["Mr", "Mrs", "Ms"]
+
+        if (!titleArr.includes(title)) {
+            res.status(400).send({ status: false, msg: "Title should be Mr, Mrs or Ms" })
+        }
+
+        if (!emailValidator.validate(email)) {
+            return res.status(400).send({ status: false, msg: "Check the format of email" })
+        } let titleArr = ["Mr", "Mrs", "Ms"]
+
+        if (!titleArr.includes(title)) {
+            res.status(400).send({ status: false, msg: "Title should be Mr, Mrs or Ms" })
+        }
+
+        if (!emailValidator.validate(email)) {
+            return res.status(400).send({ status: false, msg: "Check the format of email" })
+        }
 
         let emailValidation = await authorModel.findOne({ email: email })
         if (emailValidation) {
