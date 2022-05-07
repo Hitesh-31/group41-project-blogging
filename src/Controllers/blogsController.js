@@ -42,10 +42,15 @@ const createBlog = async function (req, res) {
     if (!findAuthor) {
       return res.status(400).send({ status: false, message: "Author does not exists."});
     }
+      const blog1 = {
+      title, body, authorId, tags, category, subcategory,
+      isPublished: isPublished ? isPublished : false,
+      publishedAt: isPublished ? date : null
+    }
+    const createdata = await blogsModel.create(blog1)
 
-    const createdata = await blogsModel.create(requestBody)
-
-    res.status(201).send({ status: true, data: createdata })
+    res.status(201).send({ status: true, message: "Blog Created", data: createdata })
+    
   }
   catch (error) {
     res.status(500).send({ msg: error.message })
